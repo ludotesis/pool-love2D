@@ -1,5 +1,5 @@
-baranda  = {}
-baranda2 = {}
+require("mesa")
+
 bocha = {}
 
 entidad1 = nil
@@ -23,16 +23,9 @@ function love.load()
     love.physics.setMeter(64)
     world = love.physics.newWorld(0, 1*64, true)
     world:setCallbacks(iniciarContacto, teminarContacto)
+ 
 
-    baranda.cuerpo = love.physics.newBody(world, 650/2, 650-25)
-    baranda.forma  = love.physics.newRectangleShape(650, 50)
-    baranda.acople = love.physics.newFixture(baranda.cuerpo, baranda.forma)
-    baranda.acople:setUserData("Baranda")
-
-    baranda2.cuerpo = love.physics.newBody(world, 650/2, 0)
-    baranda2.forma  = love.physics.newRectangleShape(650, 50)
-    baranda2.acople = love.physics.newFixture(baranda2.cuerpo, baranda2.forma)
-    baranda2.acople:setUserData("Baranda")
+    CrearMesa()
 
     bocha.cuerpo = love.physics.newBody(world, 650/2, 650/2,"dynamic")
     bocha.forma = love.physics.newCircleShape(20)
@@ -54,10 +47,8 @@ function love.update(dt)
 end
 
 function love.draw()
-    love.graphics.setColor(0.6, 0.4, 0.2)
-    love.graphics.polygon("fill", baranda.cuerpo:getWorldPoints(baranda.forma:getPoints()))
-    love.graphics.polygon("fill", baranda2.cuerpo:getWorldPoints(baranda.forma:getPoints()))
-    
+  
+    DibujarMesa()
     love.graphics.setColor(1, 1, 1)
     love.graphics.draw( bocha.sprite,
                         bocha.cuerpo:getX(),
