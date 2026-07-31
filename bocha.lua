@@ -13,6 +13,9 @@ function CrearBocha(x, y, r,sprite)
     bocha.acople:setUserData(tag)
     bocha.sprite = love.graphics.newImage(sprite)
 
+    bocha.acople:setRestitution(0.4) -- Rebote 0 a 1
+    bocha.cuerpo:setLinearDamping(0.5) -- Amortiguación 0 a 1
+    bocha.acople:setFriction(0.5) -- Friccion 0 a 1
     return bocha
 end
 
