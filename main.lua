@@ -22,7 +22,7 @@ end
 function love.load()
     
     love.physics.setMeter(64)
-    world = love.physics.newWorld(0, 1*64, true)
+    world = love.physics.newWorld(0, 0, true)
     world:setCallbacks(iniciarContacto, teminarContacto)
  
 
@@ -35,10 +35,13 @@ end
 
 function love.keypressed(key, scancode, isrepeat)
     if key == "space"  then
-        bochas[1].cuerpo:applyLinearImpulse(0,-1000)
-        bochas[2].cuerpo:applyLinearImpulse(-1000,-1000)
-        bochas[3].cuerpo:applyLinearImpulse(1000,-1000)
-        bochas[4].cuerpo:applyLinearImpulse(1000,0)
+        miBocha.cuerpo:applyLinearImpulse(0,-1000)
+    end
+end
+
+function love.mousepressed(x, y, button, istouch, presses)
+    if button == 1 then
+        MoverBocha(x,y)
     end
 end
 

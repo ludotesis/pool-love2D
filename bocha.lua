@@ -1,4 +1,6 @@
 bochas = {}
+miBocha = nil
+velocidad = 400
 
 local tag = "Bocha"
 
@@ -15,10 +17,32 @@ function CrearBocha(x, y, r,sprite)
 end
 
 function CargarBochas()
-    table.insert(bochas, CrearBocha(650/2,650/2,20, "1.png"))
-    table.insert(bochas, CrearBocha(650/2,650/2,20, "3.png"))
-    table.insert(bochas, CrearBocha(650/2,650/2,20, "4.png"))
-    table.insert(bochas, CrearBocha(650/2,650/2,20, "5.png"))
+
+    local x = 650/2
+    local y = 100
+    local cantidad = 6
+
+    for i = 1, cantidad do
+        table.insert(bochas, CrearBocha(x ,y+ (75 * i),20, i..".png"))
+    end
+
+    miBocha = bochas[cantidad]
+end
+
+function MoverBocha(x, y)
+   local bx = miBocha.cuerpo:getX()
+   local by = miBocha.cuerpo:getY()
+
+   local dx = x - bx
+   local dy = y - by
+
+   local distancia = math.sqrt(dx * dx + dy * dy)
+
+   if distancia > 0 then
+        local impulseX = (dx / distancia) * velocidad
+        local impulseY = (dy / distancia) * velocidad
+        miBocha.cuerpo:applyLinearImpulse(impulseX, impulseY)
+   end
 end
 
 function DibujarBochas()
