@@ -1,6 +1,7 @@
 require("mesa")
+require("bocha")
 
-bocha = {}
+--bocha = {}
 
 entidad1 = nil
 entidad2 = nil
@@ -27,38 +28,29 @@ function love.load()
 
     CrearMesa()
 
-    bocha.cuerpo = love.physics.newBody(world, 650/2, 650/2,"dynamic")
-    bocha.forma = love.physics.newCircleShape(20)
-    bocha.acople = love.physics.newFixture(bocha.cuerpo, bocha.forma)
-    bocha.acople:setUserData("Bocha")
-    bocha.sprite = love.graphics.newImage("bola.png")
+    CargarBochas()
 
     love.window.setMode(650, 650)
 end
 
 function love.keypressed(key, scancode, isrepeat)
-    if key == "space" and contacto then
-        bocha.cuerpo:applyLinearImpulse(0,-1000)
+    if key == "space"  then
+        bochas[1].cuerpo:applyLinearImpulse(0,-1000)
+        bochas[2].cuerpo:applyLinearImpulse(-1000,-1000)
+        bochas[3].cuerpo:applyLinearImpulse(1000,-1000)
+        bochas[4].cuerpo:applyLinearImpulse(1000,0)
     end
 end
 
 function love.update(dt)
-  world:update(dt) 
+  world:update(dt)
 end
 
 function love.draw()
   
     DibujarMesa()
-    love.graphics.setColor(1, 1, 1)
-    love.graphics.draw( bocha.sprite,
-                        bocha.cuerpo:getX(),
-                        bocha.cuerpo:getY(),
-                        0, 
-                        0.075,
-                        0.075, 
-                        256,
-                        256)
-
+    DibujarBochas()
+  
     love.graphics.setColor(1, 0, 0)
     if contacto then
         love.graphics.print("CHOQUE", 650/2,200 + 20)
