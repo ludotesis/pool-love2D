@@ -24,7 +24,7 @@ function love.load()
     world = love.physics.newWorld(0, 1*64, true)
     world:setCallbacks(iniciarContacto, teminarContacto)
 
-    baranda.cuerpo = love.physics.newBody(world, 650/2, 650-25)
+    baranda.cuerpo = love.physics.newBody(world, 650/2, 650)
     baranda.forma  = love.physics.newRectangleShape(650, 50)
     baranda.acople = love.physics.newFixture(baranda.cuerpo, baranda.forma)
     baranda.acople:setUserData("Baranda")
